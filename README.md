@@ -1,3 +1,2 @@
 # evee-tools
-
-Coming soon!
+Tools for comparative RNA-Seq analysis
