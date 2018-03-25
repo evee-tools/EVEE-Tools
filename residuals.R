@@ -1,7 +1,7 @@
 args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 4) {
-	cat("usage: Rscript residuals.R data_matrix index reference out\n")
+	cat("usage: Rscript residuals.R exp_matrix index reference out\n")
 	cat("example: Rscript residuals.R data/brain.exp_matrix.one2one.txt data/brain.index.txt human brain.residuals.human.txt\n")
 	quit()
 }
@@ -13,6 +13,11 @@ outPath <- args[4]
 
 data = exp[2:ncol(exp)]
 #print(head(data))
+
+if (sum(index[,1] == refSpecies) == 0) {
+	cat("ERROR: Reference species not found. Please list a references species that matches a species listed in the first column of your index file\n")
+	quit()
+}
 
 residuals = c()
 ref = as.matrix(data[,index[,1] == refSpecies])

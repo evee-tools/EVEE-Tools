@@ -39,7 +39,8 @@ args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 4) {
 	cat("usage: Rscript fitOUModel.R exp_matrix index tree out\n")
-	cat ("example: Rscript fitOUModel.R data/brain.exp_matrix.one2one.txt data/brain.index.txt data/mammals.tree brain.ou_stats.txt\n")
+	cat ("example: Rscript ./fitOUModel.R data/liver.exp_matrix.txt data/liver.index.txt data/mammals.tree.txt liver.ou_stats.txt\n")
+	
 	quit()
 }
 
