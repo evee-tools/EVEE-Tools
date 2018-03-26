@@ -38,7 +38,7 @@ pruneTree = function(tree, subData) {
 args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 4) {
-	cat("usage: Rscript fitOUModel.R exp_matrix index tree out\n")
+	cat("usage: Rscript ./fitOUModel.R exp_matrix index tree out\n")
 	cat ("example: Rscript ./fitOUModel.R data/liver.exp_matrix.txt data/liver.index.txt data/mammals.tree.txt liver.ou_stats.txt\n")
 	
 	quit()

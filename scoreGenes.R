@@ -1,8 +1,8 @@
 args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 4) {
-	cat("usage: Rscript scoreGenes.R ou_stats ref_exp test_exp outPrefix\n")
-	cat("example: Rscript ./scoreGenes.R data/brain.ou_stats.txt data/brain.ref_exp.txt data/brain.ref_exp.txt brain\n")
+	cat("usage: Rscript ./scoreGenes.R ou_stats ref_exp test_exp outPrefix\n")
+	cat("example: Rscript ./scoreGenes.R data/liver.ou_stats.txt data/ref_exp/liver.ref_exp.txt data/patient.test.txt patient\n")	
 	quit()
 }
 
@@ -11,7 +11,7 @@ library(edgeR)
 cat("\nreading ou_stats...\n")
 stats <- read.delim(args[1], header=T, comment.char="", stringsAsFactors = F, row.names=1)
 #get only unique genes
-cat(paste0("      removed ", sum(duplicated(stats[,2])), " genes with duplicated names\n"))
+cat(paste0("      removed ", sum(duplicated(stats[,1])), " genes with duplicated names\n"))
 stats = stats[!duplicated(stats[,1]),]
 rownames(stats) = stats[,1]
 

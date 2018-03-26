@@ -39,7 +39,7 @@ args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 5) {
 	cat("usage: Rscript ouRegimes.R exp_matrix index tree regimes outPrefix\n")
-	cat("example: Rscript ouRegimes.R data/brain.exp_matrix.one2one.txt data/brain.index.txt data/mammals.tree data/regimes.all.txt brain.regimes\n")
+	cat("example: Rscript ouRegimes.R data/liver.exp_matrix.txt data/liver.index.txt data/mammals.tree.txt data/regimes.all.txt liver.regimes\n")
 	quit()
 }
 
@@ -123,8 +123,11 @@ for (i in seq(1, nrow(data_mean.norm))) {
 	#column indices for thetas
 	thetaStart = 1
 	
+	thetaNames = c()
+
 	for (x in 1:ncol(regimes)) {
 		numThetas = length(unique(regimes[,x]))
+		thetaNames = c(thetaNames, rep(colnames(regimes)[x], numThetas))
 
 		ouch.curRegime = cbind(ouch, regimes[,x])
 		curTree = pruneTree(ouch.curRegime, subData)
@@ -147,6 +150,14 @@ for (i in seq(1, nrow(data_mean.norm))) {
 
 rownames(pvalues) = rownames(data_mean.noNA)
 rownames(thetas) = rownames(data_mean.noNA)
+rownames(aic) = rownames(data_mean.noNA)
+rownames(bic) = rownames(data_mean.noNA)
+
+colnames(thetas) = thetaNames
+colnames(pvalues) = colnames(regimes)
+colnames(aic) = colnames(regimes)
+colnames(bic) = colnames(regimes)
+
 write.table(pvalues, file = paste0(outPrefix, ".pvalues.txt"), sep="\t", quote=F)
 write.table(thetas, file = paste0(outPrefix, ".thetas.txt"), sep="\t", quote=F)
 write.table(aic, file = paste0(outPrefix, ".aic.txt"), sep="\t", quote=F)
